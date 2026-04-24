@@ -5,11 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import com.example.firstapp.model.Quote
 import com.google.gson.Gson
 
-object  DataManager {
+object DataManager {
     var data = emptyArray<Quote>()
+    var currentQuote: Quote? = null
+    var currentPage = mutableStateOf(Pages.LISTING)
+
     val isDataLoaded = mutableStateOf(false)
 
-    fun loadQuotesFromAssets(context: Context){
+    fun loadQuotesFromAssets(context: Context) {
         val inputStream = context.assets.open("quotes.json")
         val size: Int = inputStream.available()
         val buffer = ByteArray(size)
@@ -19,5 +22,14 @@ object  DataManager {
         val gson = Gson()
         data = gson.fromJson(json, Array<Quote>::class.java)
         isDataLoaded.value = true
+    }
+
+    fun switchPages(quote: Quote?) {
+        if (currentPage.value == Pages.LISTING) {
+            currentQuote = quote
+            currentPage.value = Pages.DETAIL
+        } else {
+            currentPage.value = Pages.LISTING
+        }
     }
 }

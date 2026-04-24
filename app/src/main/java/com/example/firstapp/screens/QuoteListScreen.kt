@@ -1,4 +1,5 @@
 package com.example.firstapp.screens
+
 import com.example.firstapp.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +18,7 @@ import com.example.firstapp.model.Quote
 import androidx.compose.foundation.layout.statusBarsPadding
 
 @Composable
-fun QuoteListScreen(data: Array<Quote>, onClick:()->Unit) {
+fun QuoteListScreen(data: Array<Quote>, onClick: (quote: Quote) -> Unit) {
     Column(modifier = Modifier.statusBarsPadding()) {
         val montserrat = FontFamily(Font(R.font.montserrat_regular))
         Text(
@@ -30,8 +31,6 @@ fun QuoteListScreen(data: Array<Quote>, onClick:()->Unit) {
             fontFamily = montserrat,
             fontWeight = FontWeight.Bold
         )
-        QuoteList(data = data,) {
-            onClick()
-        }
+        QuoteList(data = data, onClick)
     }
 }

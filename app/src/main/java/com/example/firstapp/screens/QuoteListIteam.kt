@@ -32,13 +32,13 @@ import com.example.firstapp.model.Quote
 
 
 @Composable
-fun QuoteListItem(quote: Quote, onClick: ()-> Unit) {
+fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
     val montserrat = FontFamily(Font(R.font.montserrat_regular))
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
             .padding(8.dp)
-            .clickable { onClick() }
+            .clickable { onClick(quote) }
     ) {
         Row(
             modifier = Modifier.padding(12.dp)
@@ -57,13 +57,13 @@ fun QuoteListItem(quote: Quote, onClick: ()-> Unit) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text =quote.text,
+                    text = quote.text,
                     style = MaterialTheme.typography.bodyLarge,
                     fontFamily = montserrat,
                     fontWeight = FontWeight.Bold
 
                 )
-               Box(
+                Box(
                     modifier = Modifier
                         .background(Color(0xFFEEEEEE))
                         .fillMaxWidth(.4f)
@@ -80,7 +80,7 @@ fun QuoteListItem(quote: Quote, onClick: ()-> Unit) {
             }
         }
     }
-    
+
 }
 
 

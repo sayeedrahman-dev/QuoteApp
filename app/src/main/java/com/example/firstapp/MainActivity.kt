@@ -2,6 +2,7 @@ package com.example.firstapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
@@ -27,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.firstapp.screens.QouteListIteam
+import com.example.firstapp.screens.QuoteDetail
 import com.example.firstapp.screens.QuoteListScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -51,20 +53,32 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-    if (DataManager.isDataLoaded.value){
-        QuoteListScreen(data = DataManager.data) {
-
+    if (DataManager.isDataLoaded.value) {
+        if (DataManager.currentPage.value == Pages.LISTING) {
+            QuoteListScreen(data = DataManager.data) {
+                DataManager.switchPages(it)
+            }
+        } else {
+            BackHandler {
+                DataManager.switchPages(null)
+            }
+            DataManager.currentQuote?.let { QuoteDetail(quote = it) }
         }
-    }else{
+
+    } else {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize(1f)
-        ){
+        ) {
             Text(
                 text = "Loading...",
                 style = MaterialTheme.typography.bodyLarge
-
             )
         }
     }
+}
+
+enum class Pages {
+    LISTING,
+    DETAIL
 }
