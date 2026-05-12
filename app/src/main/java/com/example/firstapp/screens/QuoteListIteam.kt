@@ -99,7 +99,6 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
                         )
                     }
 
-                    // শেয়ার বাটন
                     IconButton(onClick = {  }) {
                         Icon(
                             imageVector = Icons.Filled.Share,
