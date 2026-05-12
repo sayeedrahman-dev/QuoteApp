@@ -49,7 +49,6 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
     ) {
         Row(
             modifier = Modifier.padding(12.dp),
-            // Alignment.Top দিলে বামের আইকনটি উপরেই থাকবে, টেক্সট নড়বে না
             verticalAlignment = Alignment.Top
         ) {
             Image(
@@ -85,25 +84,23 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
                     fontWeight = FontWeight.Thin
                 )
 
-                // বাটনগুলোর জন্য রো (লেখকের ঠিক নিচে)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // ফেভারিট বাটন
                     IconButton(onClick = { DataManager.toggleFavorite(quote) }) {
                         Icon(
                             imageVector = if (DataManager.favoriteQuotes.contains(quote))
                                 Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                             contentDescription = "Favorite",
-                            modifier = Modifier.size(20.dp), // শেয়ার বাটনের সমান সাইজ
+                            modifier = Modifier.size(20.dp),
                             tint = if (DataManager.favoriteQuotes.contains(quote)) Color.Red else Color.Gray
                         )
                     }
 
                     // শেয়ার বাটন
-                    IconButton(onClick = { /* শেয়ার লজিক পরে হবে */ }) {
+                    IconButton(onClick = { }) {
                         Icon(
                             imageVector = Icons.Filled.Share,
                             contentDescription = "Share",
