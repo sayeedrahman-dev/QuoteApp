@@ -3,6 +3,7 @@ package com.example.firstapp.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.FormatQuote
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -47,12 +49,12 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
     ) {
         Row(
             modifier = Modifier.padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+            // Alignment.Top দিলে বামের আইকনটি উপরেই থাকবে, টেক্সট নড়বে না
+            verticalAlignment = Alignment.Top
         ) {
             Image(
                 imageVector = Icons.Filled.FormatQuote,
                 colorFilter = ColorFilter.tint(Color.White),
-                alignment = Alignment.TopStart,
                 contentDescription = "Quote",
                 modifier = Modifier
                     .size(32.dp)
@@ -67,10 +69,11 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
                     style = MaterialTheme.typography.bodyLarge,
                     fontFamily = montserrat,
                     fontWeight = FontWeight.Bold
-
                 )
+                Spacer(Modifier.height(20.dp))
                 Box(
                     modifier = Modifier
+                        .padding(top = 4.dp, bottom = 4.dp)
                         .background(Color(0xFFEEEEEE))
                         .fillMaxWidth(.4f)
                         .height(1.dp)
@@ -79,26 +82,42 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
                     text = quote.author,
                     style = MaterialTheme.typography.bodyMedium,
                     fontFamily = montserrat,
-                    fontWeight = FontWeight.Thin,
-                    modifier = Modifier.padding(top = 10.dp)
+                    fontWeight = FontWeight.Thin
                 )
 
-            }
-            Spacer(Modifier.height(8.dp))
+                // বাটনগুলোর জন্য রো (লেখকের ঠিক নিচে)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // ফেভারিট বাটন
+                    IconButton(onClick = { DataManager.toggleFavorite(quote) }) {
+                        Icon(
+                            imageVector = if (DataManager.favoriteQuotes.contains(quote))
+                                Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+                            contentDescription = "Favorite",
+                            modifier = Modifier.size(20.dp), // শেয়ার বাটনের সমান সাইজ
+                            tint = if (DataManager.favoriteQuotes.contains(quote)) Color.Red else Color.Gray
+                        )
+                    }
 
-            IconButton(onClick = { DataManager.toggleFavorite(quote) }) {
-                Icon(
-                    imageVector = if (DataManager.favoriteQuotes.contains(quote))
-                        Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                    "Favorite",
-                    tint = if (DataManager.favoriteQuotes.contains(quote)) Color.Red else Color.Gray
-                )
+                    // শেয়ার বাটন
+                    IconButton(onClick = { /* শেয়ার লজিক পরে হবে */ }) {
+                        Icon(
+                            imageVector = Icons.Filled.Share,
+                            contentDescription = "Share",
+                            modifier = Modifier.size(20.dp),
+                            tint = Color.Gray
+                        )
+                    }
+                }
             }
-
         }
     }
-
 }
+
+
 
 
 

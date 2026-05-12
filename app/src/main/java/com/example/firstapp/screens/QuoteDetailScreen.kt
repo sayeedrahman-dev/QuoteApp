@@ -67,6 +67,7 @@ fun QuoteDetail(quote: Quote) {
                     fontFamily = montserrat
                 )
                 Spacer(modifier = Modifier.height(16.dp))
+
                 Text(
                     text = quote.author,
                     fontFamily = montserrat,
