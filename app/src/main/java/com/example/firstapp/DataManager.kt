@@ -1,6 +1,7 @@
 package com.example.firstapp
 
 import android.content.Context
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import com.example.firstapp.model.Quote
 import com.google.gson.Gson
@@ -9,8 +10,10 @@ object DataManager {
     var data = emptyArray<Quote>()
     var currentQuote: Quote? = null
     var currentPage = mutableStateOf(Pages.LISTING)
+    var favoriteQuotes = mutableStateListOf<Quote>()
 
     val isDataLoaded = mutableStateOf(false)
+
 
     fun loadQuotesFromAssets(context: Context) {
         val inputStream = context.assets.open("quotes.json")
@@ -32,4 +35,12 @@ object DataManager {
             currentPage.value = Pages.LISTING
         }
     }
+    fun toggleFavorite(quote: Quote){
+        if (favoriteQuotes.contains(quote)){
+            favoriteQuotes.remove(quote)
+        }else{
+            favoriteQuotes.add(quote)
+        }
+    }
+
 }

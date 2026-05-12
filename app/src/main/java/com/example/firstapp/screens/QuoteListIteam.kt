@@ -13,9 +13,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.FormatQuote
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,6 +31,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.firstapp.DataManager
 import com.example.firstapp.R
 import com.example.firstapp.model.Quote
 
@@ -41,7 +46,8 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
             .clickable { onClick(quote) }
     ) {
         Row(
-            modifier = Modifier.padding(12.dp)
+            modifier = Modifier.padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 imageVector = Icons.Filled.FormatQuote,
@@ -78,6 +84,17 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
                 )
 
             }
+            Spacer(Modifier.height(8.dp))
+
+            IconButton(onClick = { DataManager.toggleFavorite(quote) }) {
+                Icon(
+                    imageVector = if (DataManager.favoriteQuotes.contains(quote))
+                        Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+                    "Favorite",
+                    tint = if (DataManager.favoriteQuotes.contains(quote)) Color.Red else Color.Gray
+                )
+            }
+
         }
     }
 
