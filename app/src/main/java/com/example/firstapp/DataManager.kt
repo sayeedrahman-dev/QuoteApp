@@ -35,10 +35,11 @@ object DataManager {
             currentPage.value = Pages.LISTING
         }
     }
-    fun toggleFavorite(quote: Quote){
-        if (favoriteQuotes.contains(quote)){
+
+    fun toggleFavorite(quote: Quote) {
+        if (favoriteQuotes.contains(quote)) {
             favoriteQuotes.remove(quote)
-        }else{
+        } else {
             favoriteQuotes.add(quote)
         }
     }

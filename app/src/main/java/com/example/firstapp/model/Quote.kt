@@ -1,3 +1,11 @@
 package com.example.firstapp.model
 
-data class Quote(val text: String, val author: String)
+import com.google.gson.annotations.SerializedName
+
+data class Quote(
+    @SerializedName("hadith_text")
+    val text: String?,
+
+    @SerializedName("narrator")
+    val author: String?
+)

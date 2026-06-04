@@ -45,11 +45,9 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
             .padding(8.dp)
-            .clickable { onClick(quote) }
-    ) {
+            .clickable { onClick(quote) }) {
         Row(
-            modifier = Modifier.padding(12.dp),
-            verticalAlignment = Alignment.Top
+            modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.Top
         ) {
             Image(
                 imageVector = Icons.Filled.FormatQuote,
@@ -64,7 +62,7 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = quote.text,
+                    text = quote.text?:"No Quote Available",
                     style = MaterialTheme.typography.bodyLarge,
                     fontFamily = montserrat,
                     fontWeight = FontWeight.Bold
@@ -78,7 +76,7 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
                         .height(1.dp)
                 )
                 Text(
-                    text = quote.author,
+                    text = quote.author?:"Unknow Author",
                     style = MaterialTheme.typography.bodyMedium,
                     fontFamily = montserrat,
                     fontWeight = FontWeight.Thin
@@ -91,15 +89,14 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
                 ) {
                     IconButton(onClick = { DataManager.toggleFavorite(quote) }) {
                         Icon(
-                            imageVector = if (DataManager.favoriteQuotes.contains(quote))
-                                Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+                            imageVector = if (DataManager.favoriteQuotes.contains(quote)) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                             contentDescription = "Favorite",
                             modifier = Modifier.size(20.dp),
                             tint = if (DataManager.favoriteQuotes.contains(quote)) Color.Red else Color.Gray
                         )
                     }
 
-                    IconButton(onClick = {  }) {
+                    IconButton(onClick = { }) {
                         Icon(
                             imageVector = Icons.Filled.Share,
                             contentDescription = "Share",

@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FormatQuote
 import androidx.compose.material3.Card
@@ -33,14 +35,12 @@ fun QuoteDetail(quote: Quote) {
     val montserrat = FontFamily(Font(R.font.montserrat_regular))
 
     Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
+        contentAlignment = Alignment.Center, modifier = Modifier
             .fillMaxSize()
             .background(
                 Brush.linearGradient(
                     colors = listOf(
-                        Color(0xFFE7B77C),
-                        Color(0xFFE3E1E1)
+                        Color(0xFFE7B77C), Color(0xFFE3E1E1)
                     )
                 )
             )
@@ -52,7 +52,10 @@ fun QuoteDetail(quote: Quote) {
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(16.dp, 24.dp)
+                modifier = Modifier
+                    .padding(16.dp, 24.dp)
+                    .verticalScroll(rememberScrollState())
+
             ) {
                 Image(
                     imageVector = Icons.Filled.FormatQuote,
@@ -62,14 +65,14 @@ fun QuoteDetail(quote: Quote) {
                         .rotate(180f)
                 )
                 Text(
-                    text = quote.text,
+                    text = quote.text?:"No Quote Available",
                     style = MaterialTheme.typography.bodyLarge,
                     fontFamily = montserrat
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = quote.author,
+                    text = quote.author?:"Unknow Author",
                     fontFamily = montserrat,
                     style = MaterialTheme.typography.bodyMedium
                 )

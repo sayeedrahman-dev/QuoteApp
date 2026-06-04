@@ -25,7 +25,7 @@ fun QuoteListScreen(data: Array<Quote>, onClick: (quote: Quote) -> Unit) {
             text = "Quote App",
             textAlign = TextAlign.Center,
             modifier = Modifier
-                .padding(8.dp, 16.dp)
+                .padding(4.dp, 8.dp)
                 .fillMaxWidth(1f),
             style = MaterialTheme.typography.headlineMedium, // Headline ব্যবহার করলে সুন্দর দেখায়
             fontFamily = montserrat,
