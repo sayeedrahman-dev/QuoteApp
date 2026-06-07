@@ -65,14 +65,14 @@ fun QuoteDetail(quote: Quote) {
                         .rotate(180f)
                 )
                 Text(
-                    text = quote.text?:"No Quote Available",
+                    text = quote.text ?: "No Quote Available",
                     style = MaterialTheme.typography.bodyLarge,
                     fontFamily = montserrat
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = quote.author?:"Unknow Author",
+                    text = quote.author ?: "Unknow Author",
                     fontFamily = montserrat,
                     style = MaterialTheme.typography.bodyMedium
                 )

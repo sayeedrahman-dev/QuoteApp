@@ -16,9 +16,15 @@ import androidx.compose.ui.unit.dp
 import com.example.firstapp.model.Quote
 
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import com.example.firstapp.QuoteViewModel
 
 @Composable
-fun QuoteListScreen(data: Array<Quote>, onClick: (quote: Quote) -> Unit) {
+fun QuoteListScreen(
+    data: Array<Quote>, viewModel: QuoteViewModel, onClick: (quote: Quote) -> Unit
+) {
+    val favorites by viewModel.favoriteQuotes.collectAsState(initial = emptyList())
     Column(modifier = Modifier.statusBarsPadding()) {
         val montserrat = FontFamily(Font(R.font.montserrat_regular))
         Text(
@@ -27,10 +33,12 @@ fun QuoteListScreen(data: Array<Quote>, onClick: (quote: Quote) -> Unit) {
             modifier = Modifier
                 .padding(4.dp, 8.dp)
                 .fillMaxWidth(1f),
-            style = MaterialTheme.typography.headlineMedium, // Headline ব্যবহার করলে সুন্দর দেখায়
+            style = MaterialTheme.typography.headlineMedium,
             fontFamily = montserrat,
             fontWeight = FontWeight.Bold
         )
-        QuoteList(data = data, onClick)
+        QuoteList(
+            data = data, viewModel = viewModel, favorites = favorites, onClick = onClick
+        )
     }
 }

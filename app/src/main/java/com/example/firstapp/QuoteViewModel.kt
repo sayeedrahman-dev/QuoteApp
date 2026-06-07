@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.firstapp.model.Quote
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,11 +14,14 @@ import javax.inject.Inject
 class QuoteViewModel @Inject constructor(
     private val repository: QuoteRepository
 ) : ViewModel() {
+
     private val _quotes = mutableStateOf<List<Quote>>(emptyList())
     val quotes: State<List<Quote>> = _quotes
 
     private val _isLoading = mutableStateOf(false)
     val isLoading: State<Boolean> = _isLoading
+
+    val favoriteQuotes: Flow<List<Quote>> = repository.getAllFavorites()
 
     init {
         fetchQuotes()
@@ -34,8 +38,20 @@ class QuoteViewModel @Inject constructor(
                 _isLoading.value = false
             } catch (e: Exception) {
                 _isLoading.value = false
-                println("ERORR_DEBUG: ${e.message}")
             }
         }
     }
+
+    fun addToFavorite(quote: Quote) {
+        viewModelScope.launch {
+            repository.insertFavorite(quote.copy(isFavorite = true))
+        }
+    }
+
+    fun removeFromFavorite(quote: Quote) {
+        viewModelScope.launch {
+            repository.deleteFavorite(quote)
+        }
+    }
 }
+

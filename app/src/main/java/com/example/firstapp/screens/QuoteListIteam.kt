@@ -34,12 +34,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.firstapp.DataManager
+import com.example.firstapp.QuoteViewModel
 import com.example.firstapp.R
 import com.example.firstapp.model.Quote
 
 
 @Composable
-fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
+fun QuoteListItem(
+    quote: Quote, viewModel: QuoteViewModel, isFavorite: Boolean, onClick: (quote: Quote) -> Unit
+) {
     val montserrat = FontFamily(Font(R.font.montserrat_regular))
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
@@ -62,9 +65,10 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = quote.text?:"No Quote Available",
+                    text = quote.text ?: "No Quote Available",
                     style = MaterialTheme.typography.bodyLarge,
                     fontFamily = montserrat,
+                    maxLines = 3,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(Modifier.height(20.dp))
@@ -76,7 +80,7 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
                         .height(1.dp)
                 )
                 Text(
-                    text = quote.author?:"Unknow Author",
+                    text = quote.author ?: "Unknow Author",
                     style = MaterialTheme.typography.bodyMedium,
                     fontFamily = montserrat,
                     fontWeight = FontWeight.Thin
@@ -87,12 +91,14 @@ fun QuoteListItem(quote: Quote, onClick: (quote: Quote) -> Unit) {
                     horizontalArrangement = Arrangement.End,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    IconButton(onClick = { DataManager.toggleFavorite(quote) }) {
+                    IconButton(onClick = {
+                        if (isFavorite) viewModel.removeFromFavorite(quote) else viewModel.addToFavorite(quote)
+                    }) {
                         Icon(
-                            imageVector = if (DataManager.favoriteQuotes.contains(quote)) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+                            imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                             contentDescription = "Favorite",
                             modifier = Modifier.size(20.dp),
-                            tint = if (DataManager.favoriteQuotes.contains(quote)) Color.Red else Color.Gray
+                            tint = if (isFavorite) Color.Red else Color.Gray
                         )
                     }
 

@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Singleton
 class QuoteRepository @Inject constructor(
-    private val quoteApi: QuoteApi
+    private val quoteApi: QuoteApi, private val quoteDao: QuoteDao
 ) {
     suspend fun getQuoteFromNetwork(): List<Quote>? {
         val response = quoteApi.getQuotes()
@@ -17,4 +17,14 @@ class QuoteRepository @Inject constructor(
             null
         }
     }
+
+    suspend fun insertFavorite(quote: Quote) {
+        quoteDao.insertQuote(quote)
+    }
+
+    suspend fun deleteFavorite(quote: Quote) {
+        quoteDao.deleteQuote(quote)
+    }
+
+    fun getAllFavorites() = quoteDao.getAllQuotes()
 }
