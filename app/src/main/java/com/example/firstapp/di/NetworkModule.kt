@@ -1,5 +1,6 @@
-package com.example.firstapp
+package com.example.firstapp.di
 
+import com.example.firstapp.data.remote.QuoteApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

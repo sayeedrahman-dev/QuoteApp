@@ -1,4 +1,4 @@
-package com.example.firstapp.screens
+package com.example.firstapp.ui.screens
 
 import com.example.firstapp.R
 import androidx.compose.foundation.layout.Column
@@ -18,7 +18,7 @@ import com.example.firstapp.model.Quote
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.example.firstapp.QuoteViewModel
+import com.example.firstapp.ui.viewmodel.QuoteViewModel
 
 @Composable
 fun QuoteListScreen(

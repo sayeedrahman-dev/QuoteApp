@@ -1,6 +1,7 @@
-package com.example.firstapp
+package com.example.firstapp.data.repository
 
-import com.example.firstapp.model.QuoteResponse
+import com.example.firstapp.data.local.QuoteDao
+import com.example.firstapp.data.remote.QuoteApi
 import com.example.firstapp.model.Quote
 import javax.inject.Inject
 import javax.inject.Singleton

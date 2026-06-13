@@ -1,10 +1,11 @@
-package com.example.firstapp.screens
+package com.example.firstapp.ui.screens
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import com.example.firstapp.QuoteViewModel
+import com.example.firstapp.ui.viewmodel.QuoteViewModel
 import com.example.firstapp.model.Quote
+import com.example.firstapp.ui.components.QuoteListItem
 
 @Composable
 fun QuoteList(

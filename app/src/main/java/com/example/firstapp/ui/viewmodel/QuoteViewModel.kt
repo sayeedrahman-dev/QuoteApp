@@ -1,9 +1,10 @@
-package com.example.firstapp
+package com.example.firstapp.ui.viewmodel
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.firstapp.data.repository.QuoteRepository
 import com.example.firstapp.model.Quote
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -54,4 +55,3 @@ class QuoteViewModel @Inject constructor(
         }
     }
 }
-

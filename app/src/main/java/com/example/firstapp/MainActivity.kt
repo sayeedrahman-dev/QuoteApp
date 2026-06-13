@@ -14,8 +14,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.firstapp.screens.QuoteDetail
-import com.example.firstapp.screens.QuoteListScreen
+import com.example.firstapp.ui.screens.QuoteDetail
+import com.example.firstapp.ui.screens.QuoteListScreen
+import com.example.firstapp.ui.viewmodel.QuoteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
