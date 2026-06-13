@@ -1,4 +1,4 @@
-package com.example.firstapp.screens
+package com.example.firstapp.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,8 +33,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.firstapp.DataManager
-import com.example.firstapp.QuoteViewModel
+import com.example.firstapp.ui.viewmodel.QuoteViewModel
 import com.example.firstapp.R
 import com.example.firstapp.model.Quote
 
