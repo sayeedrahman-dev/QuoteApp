@@ -40,7 +40,7 @@ fun QuoteDetail(quote: Quote) {
             .background(
                 Brush.linearGradient(
                     colors = listOf(
-                        Color(0xFFE7B77C), Color(0xFFE3E1E1)
+                        Color(0xFF232526), Color(0xFF414345)
                     )
                 )
             )

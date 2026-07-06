@@ -1,5 +1,6 @@
 package com.example.firstapp.ui.components
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -42,6 +44,7 @@ import com.example.firstapp.model.Quote
 fun QuoteListItem(
     quote: Quote, viewModel: QuoteViewModel, isFavorite: Boolean, onClick: (quote: Quote) -> Unit
 ) {
+    val context = LocalContext.current
     val montserrat = FontFamily(Font(R.font.montserrat_regular))
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
@@ -101,7 +104,16 @@ fun QuoteListItem(
                         )
                     }
 
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {
+                        val shareText = "${quote.text ?:""}\n\n-${quote.author?:"Unknown"}"
+                        val sendIntent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_TEXT,shareText)
+                            type = "text/plain"
+                        }
+                        val shareIntent = Intent.createChooser(sendIntent,null)
+                        context.startActivity(shareIntent)
+                    }) {
                         Icon(
                             imageVector = Icons.Filled.Share,
                             contentDescription = "Share",

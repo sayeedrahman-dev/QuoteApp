@@ -27,16 +27,7 @@ fun QuoteListScreen(
     val favorites by viewModel.favoriteQuotes.collectAsState(initial = emptyList())
     Column(modifier = Modifier.statusBarsPadding()) {
         val montserrat = FontFamily(Font(R.font.montserrat_regular))
-        Text(
-            text = "Quote App",
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .padding(4.dp, 8.dp)
-                .fillMaxWidth(1f),
-            style = MaterialTheme.typography.headlineMedium,
-            fontFamily = montserrat,
-            fontWeight = FontWeight.Bold
-        )
+
         QuoteList(
             data = data, viewModel = viewModel, favorites = favorites, onClick = onClick
         )

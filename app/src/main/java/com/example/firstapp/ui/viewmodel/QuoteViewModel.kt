@@ -22,6 +22,13 @@ class QuoteViewModel @Inject constructor(
     private val _isLoading = mutableStateOf(false)
     val isLoading: State<Boolean> = _isLoading
 
+    private val _isDarkMode = mutableStateOf(false)
+    val isDarkMode: State<Boolean> = _isDarkMode
+
+    fun toggleDarkMode() {
+        _isDarkMode.value = !_isDarkMode.value
+    }
+
     val favoriteQuotes: Flow<List<Quote>> = repository.getAllFavorites()
 
     init {
