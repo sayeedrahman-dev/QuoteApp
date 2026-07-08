@@ -26,13 +26,27 @@ This project served as a practical ground for debugging and resolving real-world
 * **Architecture:** MVVM (Model-View-ViewModel)
 * **Backend/API:** JSONBin
 
-<img width="720" height="1280" alt="Screenshot_20260708-235915" src="https://github.com/user-attachments/assets/100c0559-43f8-42f6-826e-367dc201bd98" />
-<img width="720" height="1280" alt="Screenshot_20260708-235936" src="https://github.com/user-attachments/assets/08a15ed6-0719-4a3c-87b2-673fdde999b6" />
-<img width="720" height="1280" alt="Screenshot_20260709-000018" src="https://github.com/user-attachments/assets/5caaa654-ffc1-4c73-be82-2f98ec57ceb3" />
-<img width="720" height="1280" alt="Screenshot_20260709-000025" src="https://github.com/user-attachments/assets/a25af36d-f496-4f7a-ad9e-95ab8b30b557" />
-<img width="720" height="1280" alt="Screenshot_20260709-000055" src="https://github.com/user-attachments/assets/406e46d3-749d-4937-a241-6ad50602d66d" />
-<img width="720" height="1280" alt="Screenshot_20260709-000102" src="https://github.com/user-attachments/assets/2a8f882f-b598-4d70-9c27-0222e328c456" />
-<img width="720" height="1280" alt="Screenshot_20260709-000115" src="https://github.com/user-attachments/assets/31dd3be4-e5e4-41b0-9730-eb55a94afe91" />
+* <table align="center">
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/100c0559-43f8-42f6-826e-367dc201bd98" width="240" alt="Home"/></td>
+    <td><img src="https://github.com/user-attachments/assets/d34d8d08-95e5-4bb1-9a3b-ea4c2fa04560" width="240" alt="Categories"/></td>
+    <td><img src="https://github.com/user-attachments/assets/a25af36d-f496-4f7a-ad9e-95ab8b30b557" width="240" alt="Favorites"/></td>
+  </tr>
+  <tr align="center">
+    <td><b>Home Screen</b></td>
+    <td><b>Categories</b></td>
+    <td><b>Favorites</b></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/406e46d3-749d-4937-a241-6ad50602d66d" width="240" alt="Detail"/></td>
+    <td><img src="https://github.com/user-attachments/assets/08a15ed6-0719-4a3c-87b2-673fdde999b6" width="240" alt="Dark Mode"/></td>
+  </tr>
+  <tr align="center">
+    <td><b>Quote Detail</b></td>
+    <td><b>Dark Mode</b></td>
+  </tr>
+</table>
+
 
 
 
