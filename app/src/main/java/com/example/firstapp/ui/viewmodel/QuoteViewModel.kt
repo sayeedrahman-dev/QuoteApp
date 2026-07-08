@@ -1,5 +1,6 @@
 package com.example.firstapp.ui.viewmodel
 
+import android.content.Context
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -7,14 +8,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.firstapp.data.repository.QuoteRepository
 import com.example.firstapp.model.Quote
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class QuoteViewModel @Inject constructor(
-    private val repository: QuoteRepository
+    private val repository: QuoteRepository,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
+
+    private val prefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
 
     private val _quotes = mutableStateOf<List<Quote>>(emptyList())
     val quotes: State<List<Quote>> = _quotes
@@ -22,11 +27,14 @@ class QuoteViewModel @Inject constructor(
     private val _isLoading = mutableStateOf(false)
     val isLoading: State<Boolean> = _isLoading
 
-    private val _isDarkMode = mutableStateOf(false)
+    private val _isDarkMode = mutableStateOf(prefs.getBoolean("is_dark", false))
     val isDarkMode: State<Boolean> = _isDarkMode
 
     fun toggleDarkMode() {
-        _isDarkMode.value = !_isDarkMode.value
+        val newMode = !_isDarkMode.value
+        _isDarkMode.value = newMode
+
+        prefs.edit().putBoolean("is_dark", newMode).apply()
     }
 
     val favoriteQuotes: Flow<List<Quote>> = repository.getAllFavorites()

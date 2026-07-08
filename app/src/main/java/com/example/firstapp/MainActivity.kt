@@ -6,7 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
@@ -15,7 +17,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.firstapp.ui.screens.QuoteDetail
 import com.example.firstapp.ui.screens.QuoteListScreen
@@ -59,28 +66,45 @@ fun App(viewModel: QuoteViewModel = hiltViewModel()) {
                 }
             } else {
                 Scaffold(topBar = {
-                    TopAppBar(title = { Text("হিকমাহ") }, actions = {
-                        IconButton(onClick = { showMenu = true }) {
-                            Icon(Icons.Default.Menu, contentDescription = "Menu")
-                        }
-                        DropdownMenu(
-                            expanded = showMenu, onDismissRequest = { showMenu = false }
+                    TopAppBar(
+                        title = {
+                            Text(
+                                text = "হিকমাহ",
+                                style = MaterialTheme.typography.headlineMedium.copy(
+                                    fontWeight = FontWeight.ExtraBold,
+                                    fontSize = 26.sp
+                                ),
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.padding(top = 8.dp)
+                            )
+                        },
+                        modifier = Modifier.statusBarsPadding(),
+                        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                            containerColor = Color.Transparent,
+                            titleContentColor = MaterialTheme.colorScheme.primary,
+                        ),
+                        actions = {
+                            IconButton(onClick = { showMenu = true }) {
+                                Icon(Icons.Default.Menu, contentDescription = "Menu")
+                            }
+                            DropdownMenu(
+                                expanded = showMenu, onDismissRequest = { showMenu = false }
 
-                        ) {
-                            DropdownMenuItem(
-                                text = { Text(if (isDarkMode) " Light Mode" else "Dark Mode") },
-                                onClick = {
-                                    viewModel.toggleDarkMode()
-                                    showMenu = false
-                                })
-                            DropdownMenuItem(
-                                text = { Text("Settings") },
-                                onClick = { showMenu = false })
-                            DropdownMenuItem(
-                                text = { Text("About") },
-                                onClick = { showMenu = false })
-                        }
-                    })
+                            ) {
+                                DropdownMenuItem(
+                                    text = { Text(if (isDarkMode) " Light Mode" else "Dark Mode") },
+                                    onClick = {
+                                        viewModel.toggleDarkMode()
+                                        showMenu = false
+                                    })
+                                DropdownMenuItem(
+                                    text = { Text("Settings") },
+                                    onClick = { showMenu = false })
+                                DropdownMenuItem(
+                                    text = { Text("About") },
+                                    onClick = { showMenu = false })
+                            }
+                        })
                 }, bottomBar = {
                     if (DataManager.currentPage.value != Pages.DETAIL) {
                         NavigationBar {
@@ -88,21 +112,34 @@ fun App(viewModel: QuoteViewModel = hiltViewModel()) {
                                 selected = DataManager.currentPage.value == Pages.LISTING,
                                 onClick = { DataManager.currentPage.value = Pages.LISTING },
                                 label = { Text("Home") },
-                                icon = { Icon(Icons.Default.Home, contentDescription = null) })
+                                icon = {
+                                    Icon(
+                                        Icons.Default.Home,
+                                        contentDescription = null
+                                    )
+                                })
 
                             NavigationBarItem(
                                 selected = DataManager.currentPage.value == Pages.FAVORITES,
-                                onClick = { DataManager.currentPage.value = Pages.FAVORITES },
+                                onClick = {
+                                    DataManager.currentPage.value = Pages.FAVORITES
+                                },
                                 label = { Text("Favorites") },
                                 icon = {
                                     Icon(
                                         Icons.Default.Favorite, contentDescription = null
                                     )
                                 })
+
                         }
+
                     }
                 }) { paddingValues ->
-                    Box(modifier = Modifier.padding(paddingValues)) {
+                    Box(
+                        modifier = Modifier
+                            .padding(paddingValues)
+
+                    ) {
                         when (DataManager.currentPage.value) {
                             Pages.LISTING -> {
                                 QuoteListScreen(
